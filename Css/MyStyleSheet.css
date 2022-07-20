@@ -11,3 +11,167 @@ body {
     background-color: #ebeced;
     font-family: sans-serif;
 }
+
+input:focus, textarea:focus {
+    outline: none !important;
+}
+
+option{
+    background-color: #ebeced;
+    color: #37454d;
+    padding: 4px;
+}
+
+/*---------------Navbar------------*/
+
+  /*First-row /Searchbar,Button*/
+    .hotels-page {
+        width: 950px;
+        margin: 0 auto;
+    }
+
+    .hotels-page .search-and-filter {
+        background-color: #37454d;
+        color: #6c767c;
+       
+    }
+
+    .hotels-page .search-and-filter .fa {
+        padding: 0px 15px;
+    }
+
+    .hotels-page .search-and-filter .first-row {
+        display: flex;
+        padding: 5px 10px;
+        height: 45px;
+       
+    }
+
+    .hotels-page .search-and-filter .first-row .first-col {
+        width: 85%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+
+    .hotels-page .search-and-filter .first-row .first-col input {
+        width: 100%;
+        height: 100%;
+        line-height: 30px;
+    }
+
+    .hotels-page .search-and-filter .first-row .second-col {            
+        width: 15%;
+        height: 100%;
+        background-color: #007fad;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        
+    }
+    
+    .hotels-page .search-and-filter .first-row .second-col input {
+        width:100%;
+        height:100%;
+        cursor:pointer;
+        color:#fff;
+    }
+
+ /*End of Searchbar,Button*/
+
+   /*Second-row /Start 2xCalendar inputs and Family Rooms*/
+   .hotels-page .search-and-filter .second-row {
+       display: flex;
+       padding: 5px 10px;
+       height: 45px;
+       justify-content: space-between;
+   }
+   .hotels-page .search-and-filter .second-row .col{
+       width:32%;
+       background-color: white;
+       display: flex;
+       align-items: center;
+       border-radius: 3px;
+   }
+   .hotels-page .search-and-filter .second-row .col input{
+       width: 100%;
+       height: 100%;
+   }
+   .hotels-page .search-and-filter .second-row .col select{
+       width: 100%;
+       height: 100%;
+       cursor: pointer;
+   }
+   .hotels-page .search-and-filter .second-row .first-col{
+       border-left:solid #007fad 7px;
+   }
+   .hotels-page .search-and-filter .second-row .second-col{
+       border-left:solid #f48f00 7px;
+   }
+   /*End of 2xCalendar inputs and Family Rooms*/
+
+
+/*Third-row Start*/
+
+      .hotels-page .search-and-filter .third-row{
+          display: flex;
+          padding: 10px 10px;
+          height: 45px;
+          font-size: 15px;
+          justify-content: space-between;
+      }
+
+      .hotels-page .search-and-filter .third-row select{
+          color:#fff;
+          width:100%;
+          cursor:pointer;
+      }
+
+      .hotels-page .search-and-filter .third-row .col{
+          border-right: solid 1px #d2d2d2;
+          padding-right: 15px;
+          min-width: 136px;
+      }
+
+      .hotels-page .search-and-filter .third-row .col:last-child{
+          border: none;
+      }
+
+      .hotels-page .search-and-filter .third-row .col .label{
+          text-align: left;
+          color: #d2d2d2;
+      }
+
+      .hotels-page .search-and-filter .third-row .first-col{
+          width: 320px
+      }
+
+      .hotels-page .search-and-filter .third-row .first-col .label{
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 15px;
+      }
+
+      .hotels-page .search-and-filter .third-row .first-col input{
+          width:100%;
+          background: #007fad;
+          -webkit-appearance: none;
+          height: 5px;
+          border-radius: 2px;
+          display: flex;
+          cursor: pointer;
+      }
+
+      .hotels-page .search-and-filter .third-row input[type=range]::-webkit-slider-thumb{
+          height: 21px;
+          width: 21px;
+          border-radius: 50px;
+          background: #d2d2d2;
+          cursor: pointer;
+          -webkit-appearance: none;
+
+      }
+
+
+/*Third-row End*/
