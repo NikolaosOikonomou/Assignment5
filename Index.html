@@ -4,10 +4,103 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="Css/MyStyleSheet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+    </style>
+
 </head>
 
 <body>
     
+    <div class="hotels-page">
+
+        <section class="search-and-filter">
+            <div class="first-row">
+                <div class="first-col">
+                    <span class="fa fa-search"></span>
+                    <input type="text" placeholder="Champs Elysees Pari"/>
+                </div>
+
+                <div class="second-col">
+                    <input type="submit" name="Search"/>
+                </div>
+
+            </div>
+            <div class="second-row">
+                <div class="col first-col">
+                    <i class="fa fa-calendar"></i>
+                    <input id="checkInDate" placeholder="Check-in" />
+                </div>
+                <div class="col second-col">
+                    <i class="fa fa-calendar"></i>
+                    <input id="checkInOut" placeholder="Check-out" />
+                </div>
+                <div class="col">
+                    <i class="fa fa-users"></i>
+                    <select>
+                        <option value="value">Room1</option>
+                        <option value="value">Room2</option>    
+                        <option value="value">Room3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="third-row">
+                <div class="col first-col">
+                    <div class="label">
+                        <span>Price</span>
+                        <span>max. $500</span>
+                    </div>
+                    <input type="range" min="0" max="" />
+                </div>
+                <div class="col">
+                    <div class="label">
+                        Property Type
+                    </div>
+                    <select>
+                        <option value="value">⭐</option>
+                        <option value="value">⭐⭐</option>
+                        <option value="value">⭐⭐⭐</option>
+                        <option value="value">⭐⭐⭐⭐</option>
+                        <option value="value">⭐⭐⭐⭐⭐</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <div class="label">
+                        Guest Rating
+                    </div>
+                    <select>
+                        <option value="value">1 -2 Ok</option>
+                        <option value="value">2 - 6 Fair</option>
+                        <option value="value">6 - 7 Good</option>
+                        <option value="value">7 - 8.5 Very Good</option>
+                        <option value="value">8.5 - 10 Excellent</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <div class="label">
+                        Hotel Location
+                    </div>
+                    <select>
+                        <option value="value">Paris</option>
+                        <option value="value">Marseille</option>
+                        <option value="value">Toulouse</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <div class="label">
+                       More Filters
+                    </div>
+                    <select>
+                        <option value="value">Bathroom</option>
+                        <option value="value">Bedroom</option>
+                        <option value="value">Beds</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
 
 
     <script src="Js/MyScripts.js"></script>
