@@ -8,7 +8,7 @@ input,select,body,h1,h2,h3,h4{
 
 
 body {
-    background-color: #ebeced;
+    background-color: #fff;
     font-family: sans-serif;
 }
 
@@ -22,13 +22,17 @@ option{
     padding: 4px;
 }
 
-/*---------------Navbar------------*/
+/*--------------- First Bar ------------*/
 
   /*First-row /Searchbar,Button*/
-    .hotels-page {
-        width: 950px;
-        margin: 0 auto;
-    }
+.hotels-page {
+    width: 950px;
+    margin: 0 auto;
+    background-color: #ebeced;
+    -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+    -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+    box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.47);
+}
 
     .hotels-page .search-and-filter {
         background-color: #37454d;
@@ -172,6 +176,62 @@ option{
           -webkit-appearance: none;
 
       }
-
-
 /*Third-row End*/
+/*=================== End of First Bar ===========================*/
+
+/*---------------- Start of Second Bar ----------------------*/
+/*Start / Map and Sorting Input*/
+     .hotels-page .map-and-sort {
+         display: flex;
+         justify-content: space-between;
+         padding-top: 15px;
+         padding-left: 10px;
+         padding-right: 10px;
+     }
+
+     .hotels-page .map-and-sort .map iframe{
+         border: solid 2px #fff;
+     }
+
+     .hotels-page .map-and-sort .sorting{
+         color: #37454d;
+         display: flex;
+         align-items: center;
+     }
+
+     .hotels-page .map-and-sort select{
+         width: 250px;
+         padding: 3px;
+         background-color: #fff;
+         border-radius: 3px;
+         border: solid 1px #9ba2a6;
+         cursor: pointer;
+         height: 35px;
+         margin: 0px 10px;
+     }
+
+     .hotels-page .map-and-sort .sorting .info-icon{
+         width: 27px;
+         height: 27px;
+         line-height: 27px;
+         text-align: center;
+         background-color: #9ba2a6;
+         color: #fff;
+         font-size: 15px;
+         font-weight: bold;
+         border-radius: 15px;
+         cursor: pointer;
+         position: relative;
+     }
+
+     .hotels-page .map-and-sort .sorting .info-icon:hover:after{
+         content: 'Click me for more information';
+         position: absolute;
+         width: 150px;
+         top: -15px;
+         left: 50px;
+         background-color: #9ba2a6;
+         border-radius: 7px;
+         color: #fff;
+     }
+/*End  / Map and Sorting Input*/
