@@ -4,11 +4,10 @@
     <meta charset="utf-8" />
     <title></title>
 
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="Scripts/jquery-3.5.1.js"></script>
     <link href="Css/MyStyleSheet.css" rel="stylesheet" />
     <style>
-
-
     </style>
 
 </head>
@@ -21,82 +20,71 @@
             <div class="first-row">
                 <div class="first-col">
                     <span class="fa fa-search"></span>
-                    <input type="text" placeholder="Champs Elysees Pari" />
+                    <input id="search-TextField" list="hotelsAuto" type="text" placeholder="Champs Elysees, Paris" value="" />
+                    <datalist id="hotelsAuto">
+                    </datalist>
                 </div>
 
                 <div class="second-col">
-                    <input type="submit" value="Search" />
+                    <input id="submit-reset" type="submit" value="Reset" />
                 </div>
 
             </div>
+
             <div class="second-row">
                 <div class="col first-col">
                     <i class="fa fa-calendar"></i>
                     <input id="checkInDate" placeholder="Check-in" />
                 </div>
+
                 <div class="col second-col">
                     <i class="fa fa-calendar"></i>
-                    <input id="checkInOut" placeholder="Check-out" />
+                    <input id="checkOutDate" placeholder="Check-out" />
+
                 </div>
+
                 <div class="col">
                     <i class="fa fa-users"></i>
-                    <select>
-                        <option value="value">Room1</option>
-                        <option value="value">Room2</option>
-                        <option value="value">Room3</option>
+                    <select id="rooms-DropDown">
                     </select>
                 </div>
+
             </div>
+
             <div class="third-row">
                 <div class="col first-col">
                     <div class="label">
                         <span>Price</span>
-                        <span>max. $500</span>
+                        <span id="maxPrice">max.$6000</span>
                     </div>
-                    <input type="range" min="0" max="" />
+                    <input id="price-Range" type="range" min="0" max="5000" />
                 </div>
                 <div class="col">
                     <div class="label">
                         Property Type
                     </div>
-                    <select>
-                        <option value="value">⭐</option>
-                        <option value="value">⭐⭐</option>
-                        <option value="value">⭐⭐⭐</option>
-                        <option value="value">⭐⭐⭐⭐</option>
-                        <option value="value">⭐⭐⭐⭐⭐</option>
+                    <select id="Property-Type-DropDown">
                     </select>
                 </div>
                 <div class="col">
                     <div class="label">
                         Guest Rating
                     </div>
-                    <select>
-                        <option value="value">1 -2 Ok</option>
-                        <option value="value">2 - 6 Fair</option>
-                        <option value="value">6 - 7 Good</option>
-                        <option value="value">7 - 8.5 Very Good</option>
-                        <option value="value">8.5 - 10 Excellent</option>
+                    <select id="Guest-Rating-DropDown">
                     </select>
                 </div>
                 <div class="col">
                     <div class="label">
                         Hotel Location
                     </div>
-                    <select>
-                        <option value="value">Paris</option>
-                        <option value="value">Marseille</option>
-                        <option value="value">Toulouse</option>
+                    <select id="Hotel-Location-DropDown">
                     </select>
                 </div>
                 <div class="col">
                     <div class="label">
                         More Filters
                     </div>
-                    <select>
-                        <option value="value">Bathroom</option>
-                        <option value="value">Bedroom</option>
-                        <option value="value">Beds</option>
+                    <select id="More-Filters-DropDown">
                     </select>
                 </div>
             </div>
@@ -106,21 +94,24 @@
             <div class="map">
                 <iframe width="150" height="60" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d83998.94722687619!2d2.277019841665155!3d48.8588377391234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sgr!4v1554987763683!5m2!1sen!2sgr"></iframe>
             </div>
+
             <div class="sorting">
                 <strong>Sort By</strong>
-                <select>
-                    <option>Hotel Name</option>
-                    <option>City</option>
-                    <option>Price</option>
+                <select id="Sort-By-DropDown">
+                    <option value="nameAsc">Hotel name (Ascending)</option>
+                    <option value="nameDesc">Hotel name (Descending)</option>
+                    <option value="cityAsc">City (Ascending)</option>
+                    <option value="cityDesc">City (Descending)</option>
+                    <option value="priceAsc">Price (Ascending)</option>
+                    <option value="priceDesc">Price (Descending)</option>
                 </select>
                 <span class="info-icon">i</span>
             </div>
-
         </section>
 
         <section class="listing-hotels">
 
-            <div class="hotel-card">
+            <!--<div class="hotel-card">
                 <div class="photo" style="background: url('http://comerciodearrecife.com/wp-content/uploads/hotel-prueba-1.jpg'); background-position: center;">
                     <i class="fa fa-heart"></i>
                     <span>1/30</span>
@@ -199,95 +190,16 @@
 
 
                 </div>
-            </div>
+            </div>-->
 
-            <div class="hotel-card">
-                <div class="photo" style="background: url('http://comerciodearrecife.com/wp-content/uploads/hotel-prueba-1.jpg'); background-position: center;">
-                    <i class="fa fa-heart"></i>
-                    <span>1/30</span>
-                </div>
-                <div class="details">
-                    <h3>Hotel Lamcaster</h3>
-                    <div class="rating" style="display:inline;">
-                        <div>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <i>Hotel</i>
-                        </div>
-
-                    </div>
-                    <div class="location">
-                        Pari,0.2 Miles to Champs Elysees
-                    </div>
-                    <div class="reviews">
-                        <span class="total">8.8</span>
-                        <b>Excellent</b>
-                        <small>(1736)</small>
-                    </div>
-
-                    <div class="location-reviews">
-                        Excellent location <small>(9.2/10)</small>
-                    </div>
-
-                </div>
-                <div class="third-party-prices">
-                    <div class="sites-and-prices">
-                        <div class="highlited">
-                            Hotel website
-                            <strong>$700</strong>
-                        </div>
-                        <div>
-                            Agoda
-                            <strong>$600</strong>
-                        </div>
-                        <div>
-                            Travelocity
-                            <strong>$500</strong>
-                        </div>
-                    </div>
-                    <div class="more-deals">
-                        <strong>More deals from</strong>
-                        <strong>$575</strong>
-                    </div>
-                </div>
-
-                <div class="call-to-action">
-                    <div class="price">
-                        <div class="before-discount">
-                            HotelPower.com
-                            <strong><s>$1,568</s></strong>
-                        </div>
-                        <div class="after-discount">
-                            Travelocity
-                            <strong>$1,100</strong>
-                            <div class="total">
-                                3 nights for <strong>$370</strong>
-                            </div>
-                            <div class="usp">
-                                <span>Free Breakfast</span>
-                            </div>
-
-                        </div>
-
-
-                        <div class="button">
-                            <a href="#">View Deal</a>
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
+         
 
         </section>
 
 
     </div>
-
-
     <script src="Js/MyScripts.js"></script>
+    <!--<script src="Scripts/jquery-3.5.1.js"></script>-->
+    
 </body>
 </html>
