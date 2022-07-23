@@ -24,7 +24,7 @@
     var propertyTypes = [];
     var guestRatings = [];
     var locations = [];
-    var filters = [];
+    var moreFilters = [];
    
 
 
@@ -57,7 +57,7 @@
         hotels = data[1].entries;
 
         //----- 3. Get Hotel Names For Autocomplete
-        let hotelNames = hotels.map(x => x.hotelName);
+        var hotelNames = hotels.map(x => x.hotelName);
         autoCompleteNames = [... new Set(hotelNames)];
         autoCompleteNames.sort();
 
@@ -65,7 +65,7 @@
         maxPrice = hotels.reduce((max, hotel) => (max.price > hotel.price) ? max : hotel).price;
 
         //----- 5. Get Available Property Types
-        let hotelTypes = hotels.map(x => x.rating);
+        var hotelTypes = hotels.map(x => x.rating);
         propertyTypes = [...new Set(hotelTypes)];
         propertyTypes.sort();
 
@@ -75,7 +75,7 @@
         guestRatings = [...new Set(hotelGuestRatings)];
 
         //----- 7. Get Hotels Location
-        var hotelLocation = hotels.map(x => x.city);
+        hotelLocation = hotels.map(x => x.city);
         locations = [...new Set(hotelLocation)];
         locations.sort();
 
@@ -89,8 +89,8 @@
             }
         }
        
-        filters = [...new Set(allFilters)];
-        filters.sort();
+        moreFilters = [...new Set(allFilters)];
+        moreFilters.sort();
         
 
         //========================= *Construct DOM ==============================
@@ -132,11 +132,11 @@
         //*A5 - Populate Guest Ratings
         guestRatingDrop.prepend("<option value=''>All</option>");
         for (let guestRating of guestRatings) {
-            if (guestRating == "Okey") guestRatingDrop.append(`<option value"${guestRating}">Okay 0-2</option>`)
-            if (guestRating == "Fair") guestRatingDrop.append(`<option value"${guestRating}">Fair 2-6</option>`)
-            if (guestRating == "Good") guestRatingDrop.append(`<option value"${guestRating}">Okay 6-7</option>`)
-            if (guestRating == "Very Good") guestRatingDrop.append(`<option value"${guestRating}">Okay 7-8.5</option>`)
-            if (guestRating == "Excellent") guestRatingDrop.append(`<option value"${guestRating}">Okay 8.5-10</option>`)
+            if (guestRating == "Okey") guestRatingDrop.append(`<option value="${guestRating}">Poor 0-2</option>`)
+            if (guestRating == "Fair") guestRatingDrop.append(`<option value="${guestRating}">Fair 2-6</option>`)
+            if (guestRating == "Good") guestRatingDrop.append(`<option value="${guestRating}">Okay 6-7</option>`)
+            if (guestRating == "Very Good") guestRatingDrop.append(`<option value="${guestRating}">Very Good 7-8.5</option>`)
+            if (guestRating == "Excellent") guestRatingDrop.append(`<option value="${guestRating}">Excellent 8.5-10</option>`)
         }
 
         //*A7 Populate Hotel Location
@@ -146,7 +146,7 @@
 
         //*A8 Populate Filters 
         moreFiltersDrop.prepend("<option value=''>All</option>");
-        var MoreFilters = filters.map(x => `<option value="${x}">${x}</option>`)
+        var MoreFilters = moreFilters.map(x => `<option value="${x}">${x}</option>`)
         moreFiltersDrop.append(MoreFilters);
 
 
@@ -175,11 +175,12 @@
 
         hotelLocationDrop.on("input", function () {
             hotelLocation = $(this).val();
+            console.log(hotelLocation);
             Controller();
         });
 
         moreFiltersDrop.on("input", function () {
-            filters = $(this).val();
+            moreFilters = $(this).val();
             Controller();
         });
 
@@ -193,10 +194,44 @@
         });
 
         //================================= Controller ====================================
+        hotelLocation = hotelLocationDrop.val();
+        moreFilters = moreFiltersDrop.val();
+
         Controller();
         function Controller() {
             filteredHotels = hotels;
+            //Filtering..
+            if (cityName) {
+                filteredHotels = filteredHotels.filter(x => x.hotelName.toUpperCase().includes(cityName.toUpperCase()));
+            }
+            if (price) {
+                filteredHotels = filteredHotels.filter(x => x.price <= price);
+            }
+            if (propertyType) {
+                filteredHotels = filteredHotels.filter(x => x.rating == propertyType);
+            }
+            if (guestRating) {
+                filteredHotels = filteredHotels.filter(x => x.ratings.text == guestRating);
+            }
+            if (hotelLocation) {
+                filteredHotels = filteredHotels.filter(x => x.city == hotelLocation);
+            }
+            if (moreFilters) {
+                filteredHotels = filteredHotels.filter(x => x.filters.some(y => y.name == moreFilters));
+            } 
 
+            //Sorting..
+            if (sortBy) {
+                switch (sortBy) {
+                    case "nameAsc": filteredHotels.sort((a, b) => a.hotelName < b.hotelName ? -1 : 1); break;
+                    case "nameDesc": filteredHotels.sort((a, b) => a.hotelName > b.hotelName ? -1 : 1); break;
+                    case "cityAsc": filteredHotels.sort((a, b) => a.city < b.city ? -1 : 1); break;
+                    case "cityDesc": filteredHotels.sort((a, b) => a.city > b.city ? -1 : 1); break;
+                    case "priceAsc": filteredHotels.sort((a, b) => a.price - b.price); break;
+                    case "priceDesc": filteredHotels.sort((a, b) => b.price - a.price); break;
+                    default: filteredHotels.sort((a, b) => a.hotelName < b.hotelName ? -1 : 1); break;
+                }
+            }
           
 
             //View
