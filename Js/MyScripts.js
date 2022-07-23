@@ -14,6 +14,8 @@
     const sortByDrop = $("#Sort-By-DropDown");
     const hotelsSection = $("#listing-hotels-section");
     const hotelsAuto = $("#hotelsAuto");
+    const forma = $("#myForm");
+   
 
     //Variables for populating Data
     var roomTypes = [];
@@ -43,7 +45,7 @@
         url: "Json/data.json",
         dataType: "json"
 
-    }).done((data) => StartApplication(data));
+    }).done((data) => StartApplication(data)).fail((errorObject) => ShowErrorPage(errorObject));
 
 
     function StartApplication(data) {
@@ -97,7 +99,7 @@
 
         //*A1 - Populate Data for Search Autocomplete
 
-        var autoCompleteElements = autoCompleteNames.map(x => `<option value="${x}">`);
+        var autoCompleteElements = autoCompleteNames.map(x => `<option value="${x}"></option>`);
         hotelsAuto.append(autoCompleteElements);
 
 
@@ -236,10 +238,25 @@
 
             //View
             hotelsSection.empty();
-            filteredHotels.forEach(ViewHotels);
+            if (filteredHotels.length > 0) {
+                filteredHotels.forEach(ViewHotels);
+            }
+            else {
+                ViewNoHotels();
+            }
+
+            submitBtn.click(function () {
+                forma[0].reset();
+                hotels.forEach(ViewHotels);
+               
+            })
         }
 
         //================================ View ========================================
+        function ViewNoHotels() {
+            let noHotelsFound = "<br/><h3>No Hotels were Found with these criteria.</h3><br/> "
+            hotelsSection.append(noHotelsFound);
+        }
 
         function ViewHotels(hotel) {
             var template = `
@@ -259,7 +276,7 @@
                        
                                   </div>
                                   <div class="location">
-                                        ${hotel.city}, 0.2 Miles to Champs Elysees
+                                       <b>City: </b> ${hotel.city}
                                   </div>
                                   <div class="reviews">
                                       <span class="total">${hotel.ratings.no.toFixed(1)}</span>
@@ -330,5 +347,29 @@
             return eles;
         }
     }
+
+    function ShowErrorPage(errorObject) {
+        if (errorObject.status == 200) {
+            var IS_JSON = true;
+            try {
+                var json = $.parseJSON(errorObject.responseText);
+            }
+            catch (err) {
+                IS_JSON = false;
+                var pageNotFound = `<br/><h3>Json format is NOT valid.</h3><br/> `
+            }
+        }
+        else {
+            var pageNotFound = `<br/><h3>Error ${errorObject.status} - Page ${errorObject.statusText}</h3><br/> `
+        }
+       
+        hotelsSection.append(pageNotFound);
+    }
+
+
+   
+   
+        
+    
 
 });
