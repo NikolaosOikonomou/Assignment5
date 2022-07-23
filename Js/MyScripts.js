@@ -148,6 +148,152 @@
         moreFiltersDrop.prepend("<option value=''>All</option>");
         var MoreFilters = filters.map(x => `<option value="${x}">${x}</option>`)
         moreFiltersDrop.append(MoreFilters);
+
+
+
+        //================================= ADD Event Listeners ==================================
+
+        searchField.on("input", function () {
+            cityName = $(this).val();
+            Controller();
+        });
+
+        priceRange.on("input", function () {
+            price = $(this).val();
+            Controller();
+        });
+
+        propertyTypeDrop.on("input", function () {
+            propertyType = $(this).val();
+            Controller();
+        });
+
+        guestRatingDrop.on("input", function () {
+            guestRating = $(this).val();
+            Controller();
+        });
+
+        hotelLocationDrop.on("input", function () {
+            hotelLocation = $(this).val();
+            Controller();
+        });
+
+        moreFiltersDrop.on("input", function () {
+            filters = $(this).val();
+            Controller();
+        });
+
+        sortByDrop.on("input", function () {
+            sortBy = $(this).val();
+            Controller();
+        });
+
+        submitBtn.on("input", function () {
+            Controller();
+        });
+
+        //================================= Controller ====================================
+        Controller();
+        function Controller() {
+            filteredHotels = hotels;
+
+          
+
+            //View
+            hotelsSection.empty();
+            filteredHotels.forEach(ViewHotels);
+        }
+
+        //================================ View ========================================
+
+        function ViewHotels(hotel) {
+            var template = `
+                                             
+                              <div class="hotel-card" >
+                              <div class="photo" style="background: url(${hotel.thumbnail}); background-position: center;">
+                                  <i class="fa fa-heart"></i>
+                                  <span>1/30</span>
+                              </div>
+                              <div class="details">
+                                  <h3>${hotel.hotelName}</h3>
+                                  <div class="rating" style="display:inline;">
+                                      <div>
+                                         ${RatingStars(hotel.rating)} 
+                                          <i>Hotel</i>
+                                      </div>
+                       
+                                  </div>
+                                  <div class="location">
+                                        ${hotel.city}, 0.2 Miles to Champs Elysees
+                                  </div>
+                                  <div class="reviews">
+                                      <span class="total">${hotel.ratings.no.toFixed(1)}</span>
+                                      <b>${hotel.ratings.text}</b>
+                                      <small>(1736)</small>
+                                  </div>
+                       
+                                  <div class="location-reviews">
+                                      Excellent location <small>(9.2/10)</small>
+                                  </div>
+                       
+                              </div>
+                              <div class="third-party-prices">
+                                  <div class="sites-and-prices">
+                                      <div class="highlited">
+                                          Hotel website
+                                          <strong>$700</strong>
+                                      </div>
+                                      <div>
+                                          Agoda
+                                          <strong>$600</strong>
+                                      </div>
+                                      <div>
+                                          Travelocity
+                                          <strong>$500</strong>
+                                      </div>
+                                  </div>
+                                  <div class="more-deals">
+                                      <strong>More deals from</strong>
+                                      <strong>$575</strong>
+                                  </div>
+                              </div>
+                       
+                              <div class="call-to-action">
+                                  <div class="price">
+                                      <div class="before-discount">
+                                          HotelPower.com
+                                          <strong><s>$${(hotel.price * 1.1).toFixed()}</s></strong>
+                                      </div>
+                                      <div class="after-discount">
+                                          Travelocity
+                                          <strong>$${hotel.price}</strong>
+                                          <div class="total">
+                                              3 nights for <strong>$${hotel.price*3}</strong>
+                                          </div>
+                                          <div class="usp">
+                                             ${hotel.filters.map(x=>`<span>${x.name + " "}</span>`)}
+                                             
+                                          </div>                 
+                                      </div>                    
+                                      <div class="button">
+                                          <a href="#">View Deal</a>
+                                      </div>
+                                  </div>       
+                              </div>
+                          </div>
+                   
+                           `
+
+            hotelsSection.append(template)
+        };
+
+        function RatingStars(rating) {
+            let eles = "";
+            for (var i = 0; i < rating; i++) {
+                eles += `<span class="fa fa-star"></span>` + " "       
+            }
+            return eles;
+        }
     }
 
 });
