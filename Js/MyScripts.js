@@ -8,9 +8,9 @@
     const maxPriceText = $("#maxPrice");
     const priceRange = $("#price-Range");
     const propertyTypeDrop = $("#Property-Type-DropDown");
-    const guestRatingDrop = $("#Guest-Rating-DropDOwn");
+    const guestRatingDrop = $("#Guest-Rating-DropDown");
     const hotelLocationDrop = $("#Hotel-Location-DropDown");
-    const moreFiltersDrop = $("#More-Filters-Dropdown");
+    const moreFiltersDrop = $("#More-Filters-DropDown");
     const sortByDrop = $("#Sort-By-DropDown");
     const hotelsSection = $("#listing-hotels-section");
     const hotelsAuto = $("#hotelsAuto");
@@ -47,8 +47,8 @@
 
 
     function StartApplication(data) {
-        //============ *Initialize Data ===============
-        console.log(data);
+        //========================== *Initialize Data =============================
+        
         //----- 1. Get Room Types 
         roomTypes = data[0].roomtypes.map(x => x.name);
         roomTypes.sort();
@@ -68,6 +68,7 @@
         let hotelTypes = hotels.map(x => x.rating);
         propertyTypes = [...new Set(hotelTypes)];
         propertyTypes.sort();
+
 
         //----- 6. Get Guest Ratings
         var hotelGuestRatings = hotels.map(x => x.ratings.text);
@@ -90,10 +91,63 @@
        
         filters = [...new Set(allFilters)];
         filters.sort();
-        console.log(filters);
-
-        //============ *END Initialize Data ===============
         
+
+        //========================= *Construct DOM ==============================
+
+        //*A1 - Populate Data for Search Autocomplete
+
+        var autoCompleteElements = autoCompleteNames.map(x => `<option value="${x}">`);
+        hotelsAuto.append(autoCompleteElements);
+
+
+        //*A2 - Populate data for RoomTypes Dropdown
+        var roomTypesElements = roomTypes.map(x => `<option value="${x}">${x}</option>`);
+        roomsDrop.append(roomTypesElements);
+
+        //*A3 - Populate max Price Field
+        maxPriceText.append(maxPrice);
+
+        //*A4 - Setting Max Price and Display values in Input Range on change
+        priceRange.attr("max", maxPrice);
+        priceRange.val(maxPrice);
+        priceRange.on("input", function () {
+            maxPriceText.text("max.$"+$(this).val());
+        })
+
+
+        //*A5 - Populate Property Types
+        propertyTypeDrop.prepend("<option value=''>All</option>");
+        for (var i = 0; i < propertyTypes.length; i++) {
+            switch (propertyTypes[i]) {
+                case 5: propertyTypeDrop.append(`<option value="${propertyTypes[i]}">⭐⭐⭐⭐⭐</option>`); break;
+                case 4: propertyTypeDrop.append(`<option value="${propertyTypes[i]}">⭐⭐⭐⭐</option>`); break;
+                case 4: propertyTypeDrop.append(`<option value="${propertyTypes[i]}">⭐⭐⭐</option>`); break;
+                case 2: propertyTypeDrop.append(`<option value="${propertyTypes[i]}">⭐⭐</option>`); break;
+                case 1: propertyTypeDrop.append(`<option value="${propertyTypes[i]}">⭐</option>`); break;
+                default: break;
+            }
+        }
+
+        //*A5 - Populate Guest Ratings
+        guestRatingDrop.prepend("<option value=''>All</option>");
+        for (let guestRating of guestRatings) {
+            if (guestRating == "Okey") guestRatingDrop.append(`<option value"${guestRating}">Okay 0-2</option>`)
+            if (guestRating == "Fair") guestRatingDrop.append(`<option value"${guestRating}">Fair 2-6</option>`)
+            if (guestRating == "Good") guestRatingDrop.append(`<option value"${guestRating}">Okay 6-7</option>`)
+            if (guestRating == "Very Good") guestRatingDrop.append(`<option value"${guestRating}">Okay 7-8.5</option>`)
+            if (guestRating == "Excellent") guestRatingDrop.append(`<option value"${guestRating}">Okay 8.5-10</option>`)
+        }
+
+        //*A7 Populate Hotel Location
+        hotelLocationDrop.prepend("<option value=''>All</option>");
+        var locationsFilters = locations.map(x => `<option value="${x}">${x}</option>`)
+        hotelLocationDrop.append(locationsFilters);
+
+        //*A8 Populate Filters 
+        moreFiltersDrop.prepend("<option value=''>All</option>");
+        var MoreFilters = filters.map(x => `<option value="${x}">${x}</option>`)
+        moreFiltersDrop.append(MoreFilters);
     }
 
 });
